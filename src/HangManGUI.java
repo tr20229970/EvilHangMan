@@ -38,7 +38,7 @@ class HangManGUI extends JFrame
 
 
 
-
+    // Main Method runs the setupGame Method
     public static void main(String args[])
     {
        setupGame();
