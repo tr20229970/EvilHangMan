@@ -81,14 +81,11 @@ public class HangMan
     /*
 
      --------------------------------------------------------------
-     [Method      : inputGuess                                    ]
-     [Args        : String                                        ]
-     [Throws      :
-     [Returns     : Void                                          ]
-     [Description : The Main Purpose of this method is to accept  ]
-     [a string as import, and be able to determine if its a valid ]                                           ]
-     [letter, along with confirming that its in the hangman word  ]                                                            ]
-     [ if it is, it adds it to storeLetter array                  ]                                          ]
+     [Method      : checkWinStatus                                ]
+     [Returns     : boolean                                       ]
+     [Description : Checked to see if the stored Letter is the    ]
+     [same as the final word. This method is only run when there  ]
+     [is one word remaining                                       ]
      --------------------------------------------------------------
      */
 
@@ -109,6 +106,8 @@ public class HangMan
 
 
         int count = 0;
+         
+         // If the Letter is not in the word
         if(word.indexOf(input.charAt(0)) == -1)
         {
             HangManGUI.updateHangManImageStatus();
@@ -117,6 +116,7 @@ public class HangMan
             return;
         }
 
+         // If the letter is in the Word
         for(int i = 0; i < word.length(); i++)
         {
             if(word.charAt(i) == input.charAt(0))
