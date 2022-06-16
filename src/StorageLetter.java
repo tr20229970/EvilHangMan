@@ -18,22 +18,25 @@ public class StorageLetter
   private static Letter[] validLetter;
 
 
+  // Creates the array
   public StorageLetter(int letterCount)
   {
       validLetter = new Letter[letterCount];
   }
 
+  // gets the array
   public Letter[] getArray()
   {
       return validLetter;
   }
 
+  // gets an object from the array
   public Letter getIndex(int index)
   {
       return validLetter[index];
   }
 
-
+  // updates the letterCount of each Letter Object
   public void updateCount()
   {
       for(Letter singleLetter : validLetter)
@@ -41,6 +44,7 @@ public class StorageLetter
               singleLetter.updateLetterCount(countChar(singleLetter.getLetter()));
   }
 
+  // Counts the amount of times, the same letter, is in the array
   public int countChar(char inputChar)
   {
       int output = 0;
@@ -51,6 +55,7 @@ public class StorageLetter
       return output;
   }
 
+  // Returns the current array, and _ if the object is null
   public String returnCurrentLetterToString()
   {
       String output = "";
