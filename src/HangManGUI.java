@@ -156,18 +156,27 @@ class HangManGUI extends JFrame
 
     }
 
-
+    /*
+     --------------------------------------------------------------
+     [Method      : mainInterFace                                  ]
+     [Returns     : void                                           ]
+     [Args        : int numOfPLays, int letterCount                ]
+     [Description : the mian code, that controls the looks         ]
+     [ of the main interface                                       ]
+     --------------------------------------------------------------
+*/
     private static void mainInterface(int numOfPlays, int letterCount)
     {
 
+        // Main Frame & Panels
         frame = new JFrame("Hangman");
         mainPanel = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         bottomPanel = new JPanel(new GridBagLayout());
         eastSidePanel = new JPanel(new BorderLayout());
         westSidePanel = new JPanel(new BorderLayout());
+        
         textArray = new JLabel[letterCount];
-
         numberOfGuesses = numOfPlays;
 
 
@@ -276,6 +285,7 @@ class HangManGUI extends JFrame
     {
         System.out.println("Updating image");
 
+        // if guessesLeft = 0
         if(numberOfGuesses - countGuesses == 0)
         {
             hangManImage = new ImageIcon(pictureArray[11]);
@@ -284,7 +294,7 @@ class HangManGUI extends JFrame
             return;
         }
 
-
+        // determines how many pictures to show depending on amount of guesses
         if(numberOfGuesses < 5)
         {
             if (currentImageState + 3 <= 11)
@@ -347,7 +357,7 @@ class HangManGUI extends JFrame
      --------------------------------------------------------------
      [Method      : updateInvalidLetterList                        ]
      [Returns     : void                                           ]
-     [Description : update the labelInvalidsLetters label with the ]
+     [Description : updates the labelInvalidsLetters label with the]
      [invalid letter, grabbed from HangMan                         ]
      --------------------------------------------------------------
 */
@@ -371,8 +381,8 @@ class HangManGUI extends JFrame
      --------------------------------------------------------------
      [Method      : displayMessage                                 ]
      [Args        : String                                         ]
-     [Description : takes in a string, and displays an alert to the  ]
-     [user.                         ]
+     [Description : takes in a string, and displays an alert to the]
+     [user.                                                        ]
      --------------------------------------------------------------
 */
 
@@ -393,6 +403,8 @@ class HangManGUI extends JFrame
 */
     private static void play()
     {
+    
+        // Grabs a new word from the wordList array
         game.getNewWord();
 
 
@@ -403,20 +415,33 @@ class HangManGUI extends JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
-
+                
+                // If there are guesses left
                 if (countGuesses < numberOfGuesses)
                 {
                     countGuesses++;
                     labelGuessesLeft.setText("         " + (numberOfGuesses - countGuesses) + "        ");
+                    
+                    // Inputs the guess to the HangMan Class
                     game.inputGuess(textField.getText());
                     textField.setText("");
+                    
+                    // Runs the Evil Play Method
                     game.evilPlay();
+                    
+                    // Cheat Mode - Information - Words Left
                     System.out.println("Possible Words Left : " + game.getWordList().size() + "\n");
+                    
+                  
                     for (Letter singleLetter : game.getGuessedList())
                         if (singleLetter.getInWord())
                             textArray[singleLetter.getIndex()].setText(String.valueOf(singleLetter.getLetter()));
+                            
+                    // Updates Invalid Letter List        
                     updateInvalidLetterList();
                 }
+                
+                // Game Over
                 else
                 {
                     displayMessage("Game Over!");
