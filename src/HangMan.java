@@ -150,6 +150,8 @@ public class HangMan
         while(inputText.hasNext())
         {
             temp = inputText.nextLine();
+             
+             // If the Word is the same length as the length selected at the start
              if(temp.length() == letterCount)
                  wordList.add(temp.toLowerCase());
         }
